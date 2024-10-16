@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedulatore Turni</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+    <div class="m-4">
+        <h1>Schedulatore Turni</h1>
+        <div class="form-group">
+            <label for="start-date">Data di Inizio:</label>
+            <input type="date" class="form-control" id="start-date">
+        </div>
+        <button id="schedule-button" class="btn btn-primary">Schedula</button>
+        
+        <div class="schedule-table-container mt-4">
+            <table id="schedule-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Farmacista</th>
+                        <!-- Le intestazioni dei giorni verranno aggiunte dinamicamente -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Le righe degli impiegati verranno aggiunte dinamicamente -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!--div class="circle-preference">1</div-->
+
+        <!-- Modale per la selezione del turno -->
+        <div id="shift-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Seleziona Turno</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="shift-select">Turno:</label>
+                            <select id="shift-select" class="form-control">
+                                <!-- Le opzioni dei turni verranno aggiunte dinamicamente -->
+                            </select>
+
+                            <label>Preferenze:</label><br>
+                           <div class="form-check">
+                                <input class="form-check-input" type="radio" name="preference" id="preferenceYes" value="yes" checked>
+                                <label class="form-check-label" for="preferenceYes">
+                                   SI
+                                </label>
+                            </div>
+                                <div class="form-check">
+                                <input class="form-check-input" type="radio" name="preference" id="preferenceNo" value="no">
+                                <label class="form-check-label" for="preferenceYes">
+                                    NO
+                                </label>
+                            </div>
+
+                        </div>
+                        <button type="button" id="add-shift-button" class="btn btn-secondary">Aggiungi Turno</button>
+                        <div id="added-shifts" class="mt-2">
+                            <!-- Turni aggiunti dinamicamente -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="scheduler/index.js" type="module"></script>
+</body>
+</html>
