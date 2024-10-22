@@ -10,6 +10,9 @@ class View {
         this.scheduleTable = document.getElementById('schedule-table').getElementsByTagName('tbody')[0];
         this.scheduleButton = document.getElementById('schedule-button');
         this.startDateInput = document.getElementById('start-date');
+        this.previousScheduleButton = document.getElementById('previous-scheduling-button');
+        this.previousScheduleSelect = document.getElementById('previous-scheduling-select');
+        this.clearScheduleButton = document.getElementById('clear-schedule-button');
         
         // modal element
         //this.shiftModal = document.getElementById('shift-modal');
@@ -134,17 +137,17 @@ class View {
     
         for (const [date, shifts] of Object.entries(scheduling)) {
             shifts.forEach(shift => {
-                const employeeIndex = employees.indexOf(shift.nome);
+                const employeeIndex = employees.indexOf(shift.employee);
                 if (employeeIndex !== -1) {
                     const cellIndex = this.getCellIndexForDate(date);
                     if (cellIndex !== -1) {
                         const row = rows[employeeIndex];
                         const cell = row.getElementsByTagName('td')[cellIndex + 1]; // +1 per saltare la cella del nome
-                        const shiftTypeClass = `shift-${shift.tipo}`;
+                        const shiftTypeClass = `shift-${shift.type}`;
                         cell.innerHTML+= `
                             <div class="${shiftTypeClass}">
-                            <div>${shift.da}</div>
-                            <div class="shift-details">${shift.tipo}</div>
+                            <div>${shift.from} - ${shift.to}</div>
+                            <div class="shift-details">${shift.type}</div>
                             </div>
                         `;
                     }
@@ -246,9 +249,22 @@ class View {
 
     bindScheduleButton(handler) {
         this.scheduleButton.addEventListener('click', handler);
-
     }
 
+    bindClearScheduleButton(handler){
+        this.clearScheduleButton.addEventListener('click', handler);
+    }
+
+    bindPreviousScheduleButton(handler) {
+        var value = this.previousScheduleSelect.value;
+        var text = this.previousScheduleSelect.options[this.previousScheduleSelect.selectedIndex].text;
+        this.previousScheduleButton.addEventListener('click', () => {handler(text)});
+    }
+
+    bindPreviousScheduleSelect(handler) {
+        
+    }
+    
     bindCellClick(handler) {
         this.cellClicking = handler;
     }

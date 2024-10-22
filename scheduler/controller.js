@@ -9,7 +9,10 @@ class Controller {
       this.view = view
     
       this.view.bindDateInput(this.handleDateInput);
+      this.view.bindPreviousScheduleSelect(this.handlePreviousSchedulingSelect);
       this.view.bindScheduleButton(this.handleScheduleButton);
+      this.view.bindPreviousScheduleButton(this.handlePreviousScheduleButton);
+      this.view.bindClearScheduleButton(this.handleClearScheduleButton);
       //this.view.bindCellClick((cellId) => this.model.getCellPreferences(cellId));
       this.view.bindCellClick(this.handleCellClick);
       this.view.bindAddModal(this.handleAddModalButton);
@@ -17,10 +20,15 @@ class Controller {
 
       this.model.bindToShiftsChanged(this.onShiftsChanged);
 
-
     }
 
     handleScheduleButton = () => {
+      //this.model.getScheduling();
+      this.onShiftsChanged(this.model.startDate, this.model.numDays, this.model.employees, this.model.schedulingResponse.scheduling, this.model.preferences);
+    }
+
+    handlePreviousScheduleButton = (value) => {
+      console.log(value);
       this.model.getScheduling();
       this.onShiftsChanged(this.model.startDate, this.model.numDays, this.model.employees, this.model.schedulingResponse.scheduling, this.model.preferences);
     }
@@ -28,6 +36,14 @@ class Controller {
     handleDateInput = (startDate) => { 
       const dateStr = moment(startDate).format(DATE_FORMAT_MODEL);
       this.model.setDateInput(dateStr);
+      this.onShiftsChanged(this.model.startDate, this.model.numDays, this.model.employees, this.model.schedulingResponse.scheduling, this.model.preferences);
+    }
+  
+    handlePreviousSchedulingSelect = (value) => { 
+    }
+
+    handleClearScheduleButton = () => {
+      this.model.clearScheduling();
       this.onShiftsChanged(this.model.startDate, this.model.numDays, this.model.employees, this.model.schedulingResponse.scheduling, this.model.preferences);
     }
 

@@ -36,6 +36,7 @@ class Model {
       this.shifts = [];
       this.preferences =  [];
       this.schedulingResponse = {};
+      this.employees_far = []
     }
   
     addShift(s) {
@@ -89,9 +90,25 @@ class Model {
     }
   
     getScheduling(){
-      this.schedulingResponse = responseSTUB;
-      this.startDate = START_DATE;
+      var response = responseSTUB
+      this.schedulingResponse = response;
+      this.startDate = response.from_date;
+      this.numDays = response.num_days;
+      this.employees = response.employees;
+      this.employees_far = response.employees_far;
+
       //this.onShiftsChanged(this.startDate, this.numDays, this.employees, this.schedulingResponse.scheduling);
+    }
+
+    clearScheduling(){
+
+      //this.employees = employees;
+      //this.startDate  = startDate;
+      //this.numDays = numDays;
+      //this.employees_far = []
+      this.shifts = [];
+      this.preferences =  [];
+      this.schedulingResponse = {};
     }
 
     getCellPreferences(emp, date){
